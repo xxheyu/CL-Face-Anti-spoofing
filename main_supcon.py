@@ -394,12 +394,15 @@ def main():
             time1 = time.time()
             loss = train(train_loader, model, criterion, average, optimizer, epoch, opt)
             time2 = time.time()
+            print('epoch {}, total time {:.2f}'.format(epoch, time2 - time1))
 
             if epoch % opt.test_freq == 0:
                 epoch_score = val(val_loader, ordered_train_loader, model, epoch, opt)
                 if epoch_score > best_score:
                     best_score = epoch_score
-                    save_file_enc= os.path.join('./weights/exp5', 'ckpt_epoch_{epoch}_{score}.pth'.format(epoch=epoch, score=best_score))
+                    save_path = './weights/exp1'
+                    os.makedirs(save_path)
+                    save_file_enc= os.path.join('save_path', 'ckpt_epoch_{epoch}_{score}.pth'.format(epoch=epoch, score=best_score))
                     torch.save(model.state_dict(), save_file_enc)
                     print('**********************')
                     print('weights saved to ./weights/exp5/ckpt_epoch_{epoch}_{score}.pth'.format(epoch=epoch, score=best_score))
