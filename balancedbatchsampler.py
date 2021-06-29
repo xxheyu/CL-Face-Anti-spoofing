@@ -18,7 +18,7 @@ class BalancedBatchSampler(BatchSampler):
             self.labels_list.append(label)
             if (i+1) % 500 == 0:
                 print('{} / {}'.format(i, len(loader)))
-                break
+                #break
         self.labels = torch.LongTensor(self.labels_list)
         self.labels_set = list(set(self.labels.numpy()))
         self.label_to_indices = {label: np.where(self.labels.numpy() == label)[0]
